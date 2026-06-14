@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wired & Well — Technology for Neurodivergent Minds</title>
+  <meta name="description" content="Wired & Well builds mental health and neurodivergent tools for the people the system hasn't reached yet. Built by someone who was there." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #faf8f3;
+      --sage:     #e8ede4;
+      --forest:   #2a4a2a;
+      --green:    #34a853;
+      --mid:      #5a8a5a;
+      --soft:     #8aaa88;
+      --ink:      #1a2e1a;
+      --muted:    #6a7a68;
+      --anchor:   #4a7a9a;
+      --purple:   #6a5a9a;
+      --gold:     #c8a84a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(90,138,90,0.12);
+      padding: 16px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--forest);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--forest); }
+
+    .nav-cta {
+      background: var(--green) !important;
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 600 !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 40px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--soft);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(42,74,42,0.25);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--forest);
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      border: 1.5px solid rgba(42,74,42,0.25);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--green);
+      background: rgba(52,168,83,0.06);
+    }
+
+    /* STORY */
+    .story {
+      background: var(--forest);
+      color: white;
+      padding: 100px 40px;
+    }
+
+    .story-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .story-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--soft);
+      margin-bottom: 32px;
+    }
+
+    .story-pull {
+      font-family: 'Lora', serif;
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 400;
+      line-height: 1.5;
+      color: #e8f0e4;
+      margin-bottom: 36px;
+    }
+
+    .story-pull em {
+      font-style: italic;
+      color: #86efac;
+    }
+
+    .story-body {
+      font-size: 17px;
+      color: #b8d4b0;
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .story-body p { margin-bottom: 20px; }
+    .story-body p:last-child { margin-bottom: 0; }
+
+    .story-sig {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 16px;
+    }
+
+    .story-sig-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #34a853, #2a8a44);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .story-sig-name {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .story-sig-role {
+      font-size: 13px;
+      color: var(--soft);
+      margin-top: 2px;
+    }
+
+    /* GAP STAT */
+    .gap-section {
+      padding: 100px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .gap-stat {
+      background: white;
+      border: 1px solid rgba(90,138,90,0.15);
+      border-radius: 24px;
+      padding: 48px;
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gap-stat::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--green), var(--anchor));
+    }
+
+    .gap-number {
+      font-family: 'Lora', serif;
+      font-size: clamp(52px, 8vw, 88px);
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .gap-label {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .gap-desc {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* APPS */
+    .apps-section {
+      padding: 40px 40px 100px;
+    }
+
+    .apps-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--soft);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-family: 'Lora', serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 48px;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .app-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(90,138,90,0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex; flex-direction: column;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    }
+
+    .app-card-header {
+      padding: 32px 32px 24px;
+    }
+
+    .app-card-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .anchor-icon { background: linear-gradient(135deg, #e8f5e8, #d0ead0); }
+    .ndbrain-icon { background: linear-gradient(135deg, #1a0a2e, #2a1a4a); }
+
+    .app-card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .anchor-tag { background: #e8f5e8; color: var(--mid); }
+    .ndbrain-tag { background: rgba(106,90,154,0.15); color: var(--purple); }
+
+    .app-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+
+    .app-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .app-card-features {
+      padding: 0 32px 24px;
+      flex: 1;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .feature-list li {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .app-card-footer {
+      padding: 20px 32px 28px;
+      border-top: 1px solid rgba(90,138,90,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .app-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .app-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #e8f5e8;
+      color: var(--mid);
+    }
+
+    /* PAY IT FORWARD */
+    .payforward {
+      background: linear-gradient(160deg, #f0f6ff, #e8f0ff);
+      border-top: 1px solid rgba(106,90,154,0.12);
+      border-bottom: 1px solid rgba(106,90,154,0.12);
+      padding: 100px 40px;
+    }
+
+    .payforward-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .payforward h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: #2a1a4a;
+      margin-bottom: 20px;
+    }
+
+    .payforward p {
+      font-size: 18px;
+      color: #5a4a7a;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .payforward-quote {
+      font-family: 'Lora', serif;
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-style: italic;
+      color: #4a3a6a;
+      line-height: 1.6;
+      padding: 32px;
+      background: white;
+      border-radius: 20px;
+      border-left: 4px solid var(--purple);
+      margin: 40px 0;
+      text-align: left;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 100px 40px;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 16px;
+    }
+
+    .contact p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .contact-card {
+      background: white;
+      border: 1px solid rgba(90,138,90,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .contact-card-emoji { font-size: 28px; margin-bottom: 12px; }
+    .contact-card h4 { font-size: 15px; font-weight: 600; color: var(--forest); margin-bottom: 4px; }
+    .contact-card p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* FOOTER */
+    footer {
+      background: var(--forest);
+      color: #b8d4b0;
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--soft);
+      margin-bottom: 32px;
+    }
+
+    .footer-links {
+      display: flex; justify-content: center; gap: 32px;
+      list-style: none;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .footer-legal {
+      font-size: 12px;
+      color: rgba(138,170,136,0.6);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 24px 40px; min-height: auto; padding-top: 40px; }
+      .story { padding: 60px 24px; }
+      .gap-section { padding: 60px 24px; }
+      .gap-stat { padding: 32px 24px; }
+      .apps-section { padding: 40px 24px 60px; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .payforward { padding: 60px 24px; }
+      .contact { padding: 60px 24px; }
+      footer { padding: 40px 24px; }
+      .footer-links { gap: 20px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-brand">Wired <span>&</span> Well</a>
+    <ul class="nav-links">
+      <li><a href="#story">Our story</a></li>
+      <li><a href="#apps">Our apps</a></li>
+      <li><a href="#payforward">Pay it forward</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://anchor.wiredandwell.co.uk" class="nav-cta">Open Anchor →</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">WIRED &amp; WELL · MENTAL HEALTH &amp; NEURODIVERGENT TOOLS</p>
+    <h1>
+      Built for the gap<br />
+      the system <em>left behind.</em>
+    </h1>
+    <p class="hero-sub">
+      1.6 million people in England are waiting for mental health support right now. Late diagnosed. Carrying trauma. Neurodivergent in a world not built for them. Struggling in the gap between needing help and getting it. We build tools for those hours.
+    </p>
+    <div class="hero-actions">
+      <a href="https://anchor.wiredandwell.co.uk" class="btn-primary">⚓ Open Anchor — free</a>
+      <a href="#story" class="btn-secondary">Read our story</a>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <p class="story-eyebrow">WHY WE EXIST</p>
+      <p class="story-pull">
+        I built Anchor because I was in that gap. <em>Struggling enough to need help. Not struggling enough for the system to help me.</em>
+      </p>
+      <div class="story-body">
+        <p>
+          I know what it feels like to call a crisis line and be told the wait is 18 weeks. To be told you're not unwell enough for services, and not well enough to cope alone. To sit with that at 2am wondering what you're supposed to do.
+        </p>
+        <p>
+          I'm late diagnosed ADHD. I've lived through multiple traumas. I know what it is to move through the world with a brain that works differently — and to spend years wondering why everything feels harder than it looks for everyone else, before finally getting an answer. And I know that the answer, when it finally comes, doesn't automatically make things easier. It just makes them make sense.
+        </p>
+        <p>
+          After that, I spent years working in mental health services — watching the same thing happen to the people I was there to support. The waitlists. The thresholds. The gap where people fall through and nobody catches them. The exhaustion of fighting for a diagnosis. The grief of trauma that never got properly acknowledged. The feeling of being too much, or not enough, for the systems designed to help you.
+        </p>
+        <p>
+          Wired & Well exists to build the tools that should have existed. Not to replace therapy or crisis care — but to fill the hours between needing help and getting it. To be there at 2am. To help someone find the words to reach out. To make the safety plan before the crisis hits.
+        </p>
+        <p>
+          Every feature in our apps was built because someone needed it — and it didn't exist. We build for the person who has been told they don't quite fit the criteria. The one waiting. The one who masks so well that nobody notices they're struggling. The late diagnosed adult who spent decades thinking they were broken. The person carrying trauma they've never had space to put down.
+        </p>
+        <p style="font-family: 'Lora', serif; font-style: italic; color: #4a7a4a; font-size: 18px; line-height: 1.7;">
+          You are seen here. This was built for you.
+        </p>
+      </div>
+      <div class="story-sig">
+        <div class="story-sig-avatar">🌿</div>
+        <div>
+          <p class="story-sig-name">The Wired & Well founder</p>
+          <p class="story-sig-role">Mental health professional · Lived experience · Building quietly</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAP STAT -->
+  <section class="gap-section">
+    <div class="gap-stat">
+      <p class="gap-number">1.6M</p>
+      <p class="gap-label">People waiting for NHS mental health support in England. Average wait: 18 weeks.</p>
+    </div>
+    <p class="gap-desc">
+      Most of them are told they're not unwell enough for crisis services, and not well enough to be seen quickly. Many waited years for a diagnosis that finally explained everything. Many carry trauma that was never given space. They wait alone — in bedrooms, at 3am, in the spaces between appointments that don't come. Our tools exist for exactly that space.
+    </p>
+  </section>
+
+  <!-- APPS -->
+  <section class="apps-section" id="apps">
+    <div class="apps-inner">
+      <p class="section-eyebrow">OUR TOOLS</p>
+      <h2 class="section-heading">Two apps. One mission.</h2>
+      <div class="apps-grid">
+
+        <!-- Anchor -->
+        <a href="https://anchor.wiredandwell.co.uk" class="app-card">
+          <div class="app-card-header">
+            <div class="app-card-icon anchor-icon">⚓</div>
+            <span class="app-card-tag anchor-tag">MENTAL HEALTH</span>
+            <h3>Anchor</h3>
+            <p>A mental health companion for the waiting list gap. Check in, breathe, reach out, and keep a safety plan — available 24/7, always free.</p>
+          </div>
+          <div class="app-card-features">
+            <ul class="feature-list">
+              <li>Daily mood and stress check-in with smart routing</li>
+              <li>Personal safety plan — all 3 levels</li>
+              <li>Reach out with pre-written scripts</li>
+              <li>Night mode for the sleepless hours</li>
+              <li>Crisis support — 999, 111, Samaritans</li>
+              <li>Journal with crisis keyword detection</li>
+            </ul>
+          </div>
+          <div class="app-card-footer">
+            <span class="app-link">Open Anchor →</span>
+            <span class="app-status">LIVE · FREE</span>
+          </div>
+        </a>
+
+        <!-- ND Brain OS -->
+        <a href="https://nd-brain-os.vercel.app" class="app-card">
+          <div class="app-card-header">
+            <div class="app-card-icon ndbrain-icon">⚡</div>
+            <span class="app-card-tag ndbrain-tag">ADHD · AUTISM · ND</span>
+            <h3>ND Brain OS</h3>
+            <p>An operating system for neurodivergent minds. Communication tools, task management, mood and sensory tracking — built for how your brain actually works.</p>
+          </div>
+          <div class="app-card-features">
+            <ul class="feature-list">
+              <li>Communication scripts for RSD, PDA, masking</li>
+              <li>Brain dump and task breakdown tools</li>
+              <li>Sensory and mood tracking</li>
+              <li>Dopamine regulation toolkit</li>
+              <li>Disclosure scripts — on your terms</li>
+              <li>Body double timer and focus tools</li>
+            </ul>
+          </div>
+          <div class="app-card-footer">
+            <span class="app-link" style="color: var(--purple);">Open ND Brain OS →</span>
+            <span class="app-status">LIVE · FREE</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PAY IT FORWARD -->
+  <section class="payforward" id="payforward">
+    <div class="payforward-inner">
+      <p class="section-eyebrow" style="color: var(--purple);">OUR MODEL</p>
+      <h2>Pay it forward</h2>
+      <p>
+        Both apps are free. They will always be free for anyone who needs them and can't afford to pay.
+      </p>
+      <blockquote class="payforward-quote">
+        "If Anchor helped you through a difficult moment — you can fund a free account for someone who's in one right now. No obligation. Just the option."
+      </blockquote>
+      <p>
+        Our pay it forward model lets subscribers fund free premium access for people who can't afford it. A community built on mutual support — because most of us have been that person who needed something and couldn't pay for it.
+      </p>
+      <p style="margin-top: 24px; font-size: 15px; color: #7a6a9a;">
+        Pay it forward subscriptions are coming soon as part of our premium tier launch.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Get in touch</h2>
+    <p>Whether you want to give feedback, partner with us, support what we're building, or just say hello — we'd love to hear from you.</p>
+    <div class="contact-cards">
+      <a href="mailto:hello@wiredandwell.co.uk" class="contact-card">
+        <p class="contact-card-emoji">✉️</p>
+        <h4>Say hello</h4>
+        <p>hello@wiredandwell.co.uk</p>
+      </a>
+      <a href="mailto:feedback@wiredandwell.co.uk" class="contact-card">
+        <p class="contact-card-emoji">💬</p>
+        <h4>App feedback</h4>
+        <p>Tell us what's working and what isn't</p>
+      </a>
+      <a href="mailto:partnerships@wiredandwell.co.uk" class="contact-card">
+        <p class="contact-card-emoji">🤝</p>
+        <h4>Partnerships</h4>
+        <p>NHS, charities, employers</p>
+      </a>
+      <a href="mailto:press@wiredandwell.co.uk" class="contact-card">
+        <p class="contact-card-emoji">📰</p>
+        <h4>Press</h4>
+        <p>Media enquiries and interviews</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-brand">Wired &amp; Well</p>
+    <p class="footer-tagline">Technology for neurodivergent minds and mental health.</p>
+    <ul class="footer-links">
+      <li><a href="https://anchor.wiredandwell.co.uk">Anchor</a></li>
+      <li><a href="https://nd-brain-os.vercel.app">ND Brain OS</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms of Service</a></li>
+      <li><a href="mailto:hello@wiredandwell.co.uk">Contact</a></li>
+    </ul>
+    <p class="footer-legal">
+      © 2026 Wired &amp; Well Ltd · Registered in England &amp; Wales<br />
+      Anchor is a self-help tool and is not a substitute for professional medical advice.
+    </p>
+  </footer>
+
+</body>
+</html>
